@@ -1,0 +1,32 @@
+* Script
+
+** Main Variables
+#+begin_src bash :tangle config-manager
+#!/bin/bash
+
+MAINFOLDER='test-directory'
+THEMESCONFIG='test-directory/themes'
+FILESFOLDER='test-directory/files'
+#+end_src
+
+** Checking If Config Files Exists
+#+begin_src bash :tangle config-manager
+
+if [ ! -d $MAINFOLDER ]
+then
+    mkdir $MAINFOLDER
+fi
+if [ ! -f $THEMESCONFIG ]
+then
+    touch $THEMESCONFIG
+    echo $FILESFOLDER > $THEMESCONFIG
+    if [ ! -d $FILESFOLDER ]
+    then
+        mkdir $FILESFOLDER
+    fi
+fi
+
+FILESFOLDER=$( head -n 1 $THEMESCONFIG )
+
+echo $FILESFOLDER
+#+end_src

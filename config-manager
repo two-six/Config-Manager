@@ -1,0 +1,23 @@
+#!/bin/bash
+
+MAINFOLDER='test-directory'
+THEMESCONFIG='test-directory/themes'
+FILESFOLDER='test-directory/files'
+
+if [ ! -d $MAINFOLDER ]
+then
+    mkdir $MAINFOLDER
+fi
+if [ ! -f $THEMESCONFIG ]
+then
+    touch $THEMESCONFIG
+    echo $FILESFOLDER > $THEMESCONFIG
+    if [ ! -d $FILESFOLDER ]
+    then
+        mkdir $FILESFOLDER
+    fi
+fi
+
+FILESFOLDER=$( head -n 1 $THEMESCONFIG )
+
+echo $FILESFOLDER
