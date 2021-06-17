@@ -11,7 +11,9 @@ rofi -show config-manager -modi "config-manager:/path/to/config-manager"
 #+end_src
 If you have no configuration folder and/or configuration files created, these will be automatically created at the first launch in *$HOME/.config/config-manager/*.
 * Configuration
-An example configuration can be found in *example* directory. It works by copying files from choosen in *themes* directory. Let's look at the provided in example *themes* file to see how to make one yourself
+An example configuration can be found in *example* directory.
+****WARNING**** *DON'T RUN THIS SCRIPT WITH EXAMPLE FILES WITHOUT DOING A BACKUP OF YOUR PREVIOUS CONFIGURATION. IT CAN COMPLETELY REMOVE IT*
+It works by copying files from choosen in *themes* directory. Let's look at the provided in example *themes* file to see how to make one yourself
 #+begin_src
 /home/user/.config/config-manager/files
 #+end_src
@@ -28,8 +30,14 @@ We begin from specifying the name of the directory, in this example it's *dark*.
 Name_of_the_configuration_file|where/to/copy/it/new_name_of_the_configuration_file
 #+end_src
 For script the base directory for the new configuration file is always $HOME. Don't try to give it full path.
-At the end of the file you can optionally specify your COMMAND file. It should be a script that is run, *after* all of the files are copied. It can for example set a new wallpaper or restart your Window Manager to apply changes.
+At the end of the file you can optionally specify your COMMAND file. It should be a script that is run, *after* all of the files are copied. It can for example set a new wallpaper or restart your Window Manager to apply changes. If you decide to use some COMMAND file, then END line is completely optional. Although if you decide to not use COMMAND file, then you need to put END line at the end of the instructions so script knows where to stop. If you don't do that, it will go on until it finds the next END or the end of the file.
 #+begin_src
 COMMAND|commands.sh
 END
 #+end_src
+
+* TODO TODO
+- Remove the need of END lines.
+- Add some templating instructions.
+- Add the ability to copy subdirectiores in configuration directories.
+- Add the ability to run COMMAND file before copying files.
