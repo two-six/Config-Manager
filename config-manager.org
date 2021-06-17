@@ -11,22 +11,54 @@ FILESFOLDER='test-directory/files'
 
 ** Checking If Config Files Exists
 #+begin_src bash :tangle config-manager
-
-if [ ! -d $MAINFOLDER ]
+if [ $# -eq 0 ]
 then
-    mkdir $MAINFOLDER
-fi
-if [ ! -f $THEMESCONFIG ]
-then
-    touch $THEMESCONFIG
-    echo $FILESFOLDER > $THEMESCONFIG
-    if [ ! -d $FILESFOLDER ]
+    if [ ! -d $MAINFOLDER ]
     then
-        mkdir $FILESFOLDER
+        mkdir $MAINFOLDER
+    fi
+    if [ ! -f $THEMESCONFIG ]
+    then
+        touch $THEMESCONFIG
+        echo $FILESFOLDER > $THEMESCONFIG
+        if [ ! -d $FILESFOLDER ]
+        then
+            mkdir $FILESFOLDER
+        fi
     fi
 fi
-
 FILESFOLDER=$( head -n 1 $THEMESCONFIG )
+#+end_src
 
-echo $FILESFOLDER
+#+RESULTS:
+
+** Listing All Available Themes If No Arguments
+#+begin_src bash :tangle config-manager
+if [ $# -eq 0 ]
+then
+    ls $FILESFOLDER
+#+end_src
+** If There Is Argument, Looks For a Corresponding Theme In Config File And Moves Files
+#+begin_src bash :tangle config-manager
+else
+    LINE=$( grep -n "NAME|$1" $THEMESCONFIG | cut -d : -f1 )
+    LENGTH=$( wc -l $THEMESCONFIG | cut -d ' ' -f1 )
+    for (( ; ; ))
+    do
+        LINE=$((LINE+1))
+        CURRENT=$( sed -n $LINE'p' $THEMESCONFIG )
+        if [ $CURRENT == "END" ] || [ $LINE -gt $LENGTH ]
+        then
+            break
+        fi
+        if [ $LINE -gt 100 ]
+        then
+            echo "forced end"
+            break
+        fi
+        NAME=$( cut -d \| -f1 <<< $CURRENT )
+        DESTINATION=$( cut -d \| -f2 <<< $CURRENT )
+        cp -r $FILESFOLDER/$1/$NAME ~/$DESTINATION
+    done
+fi
 #+end_src

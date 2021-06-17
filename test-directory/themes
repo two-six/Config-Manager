@@ -1,1 +1,10 @@
 test-directory/files
+
+NAME|dark
+polybar|.config/polybar/config
+rofi.rasi|.config/rofi/config.rasi
+END
+
+NAME|light
+
+END
