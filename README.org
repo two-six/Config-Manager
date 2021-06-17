@@ -41,3 +41,4 @@ END
 - Add some templating instructions.
 - Add the ability to copy subdirectiores in configuration directories.
 - Add the ability to run COMMAND file before copying files.
+- Automatically create backup files of the previous configuration.
