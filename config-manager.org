@@ -51,7 +51,8 @@ else
     do
         LINE=$((LINE+1))
         CURRENT=$( sed -n $LINE'p' $THEMESCONFIG )
-        if [ $CURRENT == "END" ] || [ $LINE -gt $LENGTH ]
+        if [ $CURRENT == "END" ] || [ $LINE -gt $LENGTH ] ||
+               [ $( cut -d \| -f1 <<< $CURRENT ) == "COMMAND" ]
         then
             break
         fi
@@ -64,5 +65,15 @@ else
         DESTINATION=$( cut -d \| -f2 <<< $CURRENT )
         cp -r $FILESFOLDER/$1/$NAME ~/$DESTINATION
     done
+fi
+#+end_src
+
+** If There Was a Command Variable, Executes Corresponding File
+#+begin_src bash :tangle config-manager
+if [[ $( cut -d \| -f1 <<< $CURRENT ) == "COMMAND" ]]
+then
+    COMMANDFILE=$( cut -d \| -f2 <<< $CURRENT )
+    chmod +x $FILESFOLDER/$1/$COMMANDFILE
+    exec $FILESFOLDER/$1/$COMMANDFILE
 fi
 #+end_src
