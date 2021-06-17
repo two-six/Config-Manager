@@ -56,7 +56,7 @@ else
         then
             break
         fi
-        if [ $LINE -gt 100 ]
+        if [ $LINE -gt 100000 ]
         then
             echo "forced end"
             break

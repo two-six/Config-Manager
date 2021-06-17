@@ -1,1 +1,35 @@
 * Introduction
+As the name implies it's a simple configuration files manager. You can use it to quickly change your colorscheme or settings of your favorite program. It's entirely written in Bash and the only requirement is Rofi.
+* Quick Start
+To use it, you first need to give it execution permissions like that:
+#+begin_src bash
+chmod +x config-manager
+#+end_src
+To launch this script, you need to run the following command:
+#+begin_src bash
+rofi -show config-manager -modi "config-manager:/path/to/config-manager"
+#+end_src
+If you have no configuration folder and/or configuration files created, these will be automatically created at the first launch in *$HOME/.config/config-manager/*.
+* Configuration
+An example configuration can be found in *example* directory. It works by copying files from choosen in *themes* directory. Let's look at the provided in example *themes* file to see how to make one yourself
+#+begin_src
+/home/user/.config/config-manager/files
+#+end_src
+
+At the beginning of the file is folder containing your various configurations. By default it's $HOME/.config/config-manager/files.
+After that you have to give intructions where to put configuration files from your folders.
+#+begin_src
+NAME|dark
+polybar|.config/polybar/config
+rofi|.config/rofi/config.rasi
+#+end_src
+We begin from specifying the name of the directory, in this example it's *dark*. This line should always be above the rest of the instructions. After seeing that line, script start to look where to copy files. General template for this is:
+#+begin_src
+Name_of_the_configuration_file|where/to/copy/it/new_name_of_the_configuration_file
+#+end_src
+For script the base directory for the new configuration file is always $HOME. Don't try to give it full path.
+At the end of the file you can optionally specify your COMMAND file. It should be a script that is run, *after* all of the files are copied. It can for example set a new wallpaper or restart your Window Manager to apply changes.
+#+begin_src
+COMMAND|commands.sh
+END
+#+end_src
