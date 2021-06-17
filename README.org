@@ -12,7 +12,7 @@ rofi -show config-manager -modi "config-manager:/path/to/config-manager"
 If you have no configuration folder and/or configuration files created, these will be automatically created at the first launch in *$HOME/.config/config-manager/*.
 * Configuration
 An example configuration can be found in *example* directory.
-*WARNING* *DON'T RUN THIS SCRIPT WITH EXAMPLE FILES WITHOUT DOING A BACKUP OF YOUR PREVIOUS CONFIGURATION. IT CAN COMPLETELY REMOVE IT.*
+*WARNING:* *DON'T RUN THIS SCRIPT WITH EXAMPLE FILES WITHOUT DOING A BACKUP OF YOUR PREVIOUS CONFIGURATION. IT CAN COMPLETELY REMOVE IT.*
 It works by copying files from choosen in *themes* directory. Let's look at the provided in example *themes* file to see how to make one yourself
 #+begin_src
 /home/user/.config/config-manager/files
