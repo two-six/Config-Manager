@@ -4,9 +4,9 @@
 #+begin_src bash :tangle config-manager
 #!/bin/bash
 
-MAINFOLDER='test-directory'
-THEMESCONFIG='test-directory/themes'
-FILESFOLDER='test-directory/files'
+MAINFOLDER="${HOME}/.config/config-manager"
+THEMESCONFIG="${MAINFOLDER}/themes"
+FILESFOLDER="${MAINFOLDER}/files"
 #+end_src
 
 ** Checking If Config Files Exists
@@ -15,7 +15,10 @@ if [ $# -eq 0 ]
 then
     if [ ! -d $MAINFOLDER ]
     then
-        mkdir $MAINFOLDER
+        mkdir -p $MAINFOLDER
+        touch ${HOME}/themes
+        echo $FILESFOLDER > ${HOME}/themes
+        mv ${HOME}/themes ${THEMESCONFIG}
     fi
     if [ ! -f $THEMESCONFIG ]
     then
@@ -23,7 +26,7 @@ then
         echo $FILESFOLDER > $THEMESCONFIG
         if [ ! -d $FILESFOLDER ]
         then
-            mkdir $FILESFOLDER
+            mkdir -p $FILESFOLDER
         fi
     fi
 fi
@@ -38,6 +41,7 @@ if [ $# -eq 0 ]
 then
     ls $FILESFOLDER
 #+end_src
+
 ** If There Is Argument, Looks For a Corresponding Theme In Config File And Moves Files
 #+begin_src bash :tangle config-manager
 else

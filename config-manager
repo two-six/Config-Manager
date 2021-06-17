@@ -1,14 +1,17 @@
 #!/bin/bash
 
-MAINFOLDER='test-directory'
-THEMESCONFIG='test-directory/themes'
-FILESFOLDER='test-directory/files'
+MAINFOLDER="${HOME}/.config/config-manager"
+THEMESCONFIG="${MAINFOLDER}/themes"
+FILESFOLDER="${MAINFOLDER}/files"
 
 if [ $# -eq 0 ]
 then
     if [ ! -d $MAINFOLDER ]
     then
-        mkdir $MAINFOLDER
+        mkdir -p $MAINFOLDER
+        touch ${HOME}/themes
+        echo $FILESFOLDER > ${HOME}/themes
+        mv ${HOME}/themes ${THEMESCONFIG}
     fi
     if [ ! -f $THEMESCONFIG ]
     then
@@ -16,7 +19,7 @@ then
         echo $FILESFOLDER > $THEMESCONFIG
         if [ ! -d $FILESFOLDER ]
         then
-            mkdir $FILESFOLDER
+            mkdir -p $FILESFOLDER
         fi
     fi
 fi
