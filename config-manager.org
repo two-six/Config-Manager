@@ -42,7 +42,7 @@ then
     ls $FILESFOLDER
 #+end_src
 
-** If There Is Argument, Looks For a Corresponding Theme In Config File And Moves Files
+** If There Is Argument, Looks For a Corresponding Theme In Config File And Moves Files or subdirectories
 #+begin_src bash :tangle config-manager
 else
     if [ ! -d $MAINFOLDER/backup ]
@@ -50,13 +50,22 @@ else
         mkdir $MAINFOLDER/backup
     fi
     rm -rf $MAINFOLDER/backup/*
+    FILES=1
     LINE=$( grep -n "NAME|$1" $CONFIG | cut -d : -f1 )
     LENGTH=$( wc -l $CONFIG | cut -d ' ' -f1 )
     for (( ; ; ))
     do
         LINE=$((LINE+1))
         CURRENT=$( sed -n $LINE'p' $CONFIG )
-        if [ $( cut -d \| -f1 <<< $CURRENT ) == "NAME" ] || [ $LINE -gt $LENGTH ] ||
+        if [ $CURRENT == "FILES" ]
+        then
+            FILES=1
+            continue
+        elif [ $CURRENT == "SUBDIRS" ]
+        then
+            FILES=0
+            continue
+        elif [ $( cut -d \| -f1 <<< $CURRENT ) == "NAME" ] || [ $LINE -gt $LENGTH ] ||
                [ $( cut -d \| -f1 <<< $CURRENT ) == "COMMAND" ]
         then
             break
@@ -68,11 +77,20 @@ else
         fi
         NAME=$( cut -d \| -f1 <<< $CURRENT )
         DESTINATION=$( cut -d \| -f2 <<< $CURRENT )
-        if [ -f ~/$DESTINATION ]
+        if [ $FILES -eq 1 ]
         then
-            cp ~/$DESTINATION $MAINFOLDER/backup/$NAME
+            if [ -f ~/$DESTINATION ]
+            then
+                cp ~/$DESTINATION $MAINFOLDER/backup/$NAME
+            fi
+            cp $FILESFOLDER/$1/$NAME ~/$DESTINATION
+        else
+            if [ -d ~/$DESTINATION ]
+            then
+                cp -r ~/$DESTINATION $MAINFOLDER/backup/$NAME
+            fi
+            cp -r $FILESFOLDER/$1/$NAME ~/$DESTINATION
         fi
-        cp -r $FILESFOLDER/$1/$NAME ~/$DESTINATION
     done
 fi
 #+end_src

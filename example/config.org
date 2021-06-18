@@ -1,0 +1,41 @@
+* Example Configuration File
+** Specifying Directory With Configurations
+#+begin_src text :tangle config
+/home/user/.config/config-manager/files
+#+end_src
+
+** Name Of the Configuration Directory
+#+begin_src text :tangle config
+NAME|dark
+#+end_src
+** After This Line Specify Where To Copy Every File
+If you only want to copy files, without any subdirectories it's completely optional
+#+begin_src text :tangle config
+FILES
+#+end_src
+** Copy Paths For Every File
+#+begin_src text :tangle config
+polybar|.config/polybar/config
+rofi|.config/rofi/config.rasi
+#+end_src
+** After This Line Specify Where To Copy Every Subdirectory
+#+begin_src text :tangle config
+SUBDIRS
+#+end_src
+** Copy Paths For Every Subdirectory
+#+begin_src text :tangle config
+directory|.config/polybar/dir
+#+end_src
+** Optional COMMAND File
+It's your little script which will run *after* copying every file and creating backup.
+#+begin_src text :tangle config
+COMMAND|commands.sh
+#+end_src
+
+** Same Goes For Every Other Configuration
+#+begin_src text :tangle config
+NAME|light
+rofi|.config/rofi/config.rasi
+polybar|.config/polybar/config
+COMMAND|commands.sh
+#+end_src

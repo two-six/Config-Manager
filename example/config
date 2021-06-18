@@ -1,13 +1,19 @@
 /home/user/.config/config-manager/files
 
 NAME|dark
+
+FILES
+
 polybar|.config/polybar/config
 rofi|.config/rofi/config.rasi
+
+SUBDIRS
+
+directory|.config/polybar/dir
+
 COMMAND|commands.sh
-END
 
 NAME|light
 rofi|.config/rofi/config.rasi
 polybar|.config/polybar/config
 COMMAND|commands.sh
-END

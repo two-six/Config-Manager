@@ -11,32 +11,9 @@ rofi -show config-manager -modi "config-manager:/path/to/config-manager"
 #+end_src
 If you have no configuration folder and/or configuration files created, these will be automatically created at the first launch in *$HOME/.config/config-manager/*. Just to be on the safe side script automatically creates backup of the previous configuration in *$HOME/.config/config-manager/backup* with names corresponding to those specified in the *config* file.
 * Configuration
-An example configuration can be found in *example* directory.
-It works by copying files from choosen in *config* directory. Let's look at the provided in example *config* file to see how to make one yourself:
-#+begin_src
-/home/user/.config/config-manager/files
-#+end_src
-At the beginning of the file is folder containing your various configurations. By default it's $HOME/.config/config-manager/files.
-After that you have to give intructions where to put configuration files from your directories.
-#+begin_src
-NAME|dark
-polybar|.config/polybar/config
-rofi|.config/rofi/config.rasi
-#+end_src
-We begin from specifying the name of the directory, in this example it's *dark*. This line should always be above the rest of the instructions. After seeing that line, script start to look where to copy files. General template for this is:
-#+begin_src
-Name_of_the_configuration_file|where/to/copy/it/new_name_of_the_configuration_file
-#+end_src
-For script the base directory for the new configuration file is always $HOME. Don't try to give it full path.
-At the end of the file you can optionally specify your COMMAND file. It should be a script that is run, *after* all of the files are copied. It can for example set a new wallpaper or restart your Window Manager to apply changes.
-#+begin_src
-COMMAND|commands.sh
-#+end_src
-If script reach end of the file or settings for the next configuration, it automatically stops.
 
 * TODO TODO
 - Add some templating instructions.
-- Add the ability to copy subdirectories in configuration directories.
 - Add the ability to run COMMAND file before copying files.
 - Create cli version of the script.
 - Create dmenu version of the script.
