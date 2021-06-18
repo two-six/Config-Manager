@@ -30,6 +30,11 @@ then
     ls $FILESFOLDER
 
 else
+    if [ ! -d $MAINFOLDER/backup ]
+    then
+        mkdir $MAINFOLDER/backup
+    fi
+    rm -rf $MAINFOLDER/backup/*
     LINE=$( grep -n "NAME|$1" $CONFIG | cut -d : -f1 )
     LENGTH=$( wc -l $CONFIG | cut -d ' ' -f1 )
     for (( ; ; ))
@@ -48,6 +53,10 @@ else
         fi
         NAME=$( cut -d \| -f1 <<< $CURRENT )
         DESTINATION=$( cut -d \| -f2 <<< $CURRENT )
+        if [ -f ~/$DESTINATION ]
+        then
+            cp ~/$DESTINATION $MAINFOLDER/backup/$NAME
+        fi
         cp -r $FILESFOLDER/$1/$NAME ~/$DESTINATION
     done
 fi
