@@ -38,3 +38,5 @@ If script reach end of the file or settings for the next configuration, it autom
 - Add some templating instructions.
 - Add the ability to copy subdirectories in configuration directories.
 - Add the ability to run COMMAND file before copying files.
+- Create cli version of the script.
+- Create dmenu version of the script.
