@@ -13,13 +13,13 @@ If you have no configuration folder and/or configuration files created, these wi
 * Configuration
 An example configuration can be found in *example* directory.
 *WARNING:* *DON'T RUN THIS SCRIPT WITH EXAMPLE FILES WITHOUT DOING A BACKUP OF YOUR PREVIOUS CONFIGURATION. IT CAN COMPLETELY REMOVE IT.*
-It works by copying files from choosen in *themes* directory. Let's look at the provided in example *themes* file to see how to make one yourself
+It works by copying files from choosen in *config* directory. Let's look at the provided in example *config* file to see how to make one yourself:
 #+begin_src
 /home/user/.config/config-manager/files
 #+end_src
 
 At the beginning of the file is folder containing your various configurations. By default it's $HOME/.config/config-manager/files.
-After that you have to give intructions where to put configuration files from your folders.
+After that you have to give intructions where to put configuration files from your directories.
 #+begin_src
 NAME|dark
 polybar|.config/polybar/config
@@ -39,6 +39,6 @@ END
 * TODO TODO
 - Remove the need of END lines.
 - Add some templating instructions.
-- Add the ability to copy subdirectiores in configuration directories.
+- Add the ability to copy subdirectories in configuration directories.
 - Add the ability to run COMMAND file before copying files.
 - Automatically create backup files of the previous configuration.
