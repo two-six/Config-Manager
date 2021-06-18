@@ -17,7 +17,6 @@ It works by copying files from choosen in *config* directory. Let's look at the 
 #+begin_src
 /home/user/.config/config-manager/files
 #+end_src
-
 At the beginning of the file is folder containing your various configurations. By default it's $HOME/.config/config-manager/files.
 After that you have to give intructions where to put configuration files from your directories.
 #+begin_src
@@ -30,14 +29,13 @@ We begin from specifying the name of the directory, in this example it's *dark*.
 Name_of_the_configuration_file|where/to/copy/it/new_name_of_the_configuration_file
 #+end_src
 For script the base directory for the new configuration file is always $HOME. Don't try to give it full path.
-At the end of the file you can optionally specify your COMMAND file. It should be a script that is run, *after* all of the files are copied. It can for example set a new wallpaper or restart your Window Manager to apply changes. If you decide to use some COMMAND file, then END line is completely optional. Although if you decide to not use COMMAND file, then you need to put END line at the end of the instructions so script knows where to stop. If you don't do that, it will go on until it finds the next END or the end of the file.
+At the end of the file you can optionally specify your COMMAND file. It should be a script that is run, *after* all of the files are copied. It can for example set a new wallpaper or restart your Window Manager to apply changes.
 #+begin_src
 COMMAND|commands.sh
-END
 #+end_src
+If script reach end of the file or settings for the next configuration, it automatically stops.
 
 * TODO TODO
-- Remove the need of END lines.
 - Add some templating instructions.
 - Add the ability to copy subdirectories in configuration directories.
 - Add the ability to run COMMAND file before copying files.
