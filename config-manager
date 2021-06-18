@@ -36,7 +36,7 @@ else
     do
         LINE=$((LINE+1))
         CURRENT=$( sed -n $LINE'p' $CONFIG )
-        if [ $CURRENT == "END" ] || [ $LINE -gt $LENGTH ] ||
+        if [ $( cut -d \| -f1 <<< $CURRENT ) == "NAME" ] || [ $LINE -gt $LENGTH ] ||
                [ $( cut -d \| -f1 <<< $CURRENT ) == "COMMAND" ]
         then
             break
