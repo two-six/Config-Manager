@@ -26,7 +26,7 @@ then
         echo $FILESFOLDER > $CONFIG
         if [ ! -d $FILESFOLDER ]
         then
-            mkdir -p $FILESFOLDER
+           mkdir -p $FILESFOLDER
         fi
     fi
 fi
@@ -42,7 +42,7 @@ then
     ls $FILESFOLDER
 #+end_src
 
-** If There Is Argument, Looks For a Corresponding Theme In Config File And Moves Files or subdirectories
+** If There Is Argument, Looks For a Corresponding Theme In Config File And Moves Files or Subdirectories
 #+begin_src bash :tangle config-manager
 else
     if [ ! -d $MAINFOLDER/backup ]
@@ -51,7 +51,7 @@ else
     fi
     rm -rf $MAINFOLDER/backup/*
     FILES=1
-    LINE=$( grep -n "NAME|$1" $CONFIG | cut -d : -f1 )
+    LINE=$( grep -nx "NAME|$1" $CONFIG | cut -d : -f1 )
     LENGTH=$( wc -l $CONFIG | cut -d ' ' -f1 )
     for (( ; ; ))
     do
@@ -68,11 +68,6 @@ else
         elif [ $( cut -d \| -f1 <<< $CURRENT ) == "NAME" ] || [ $LINE -gt $LENGTH ] ||
                [ $( cut -d \| -f1 <<< $CURRENT ) == "COMMAND" ]
         then
-            break
-        fi
-        if [ $LINE -gt $LENGTH ]
-        then
-            echo "forced end"
             break
         fi
         NAME=$( cut -d \| -f1 <<< $CURRENT )
@@ -94,6 +89,8 @@ else
     done
 fi
 #+end_src
+
+#+RESULTS:
 
 ** If There Was a Command Variable, Executes Corresponding File
 #+begin_src bash :tangle config-manager

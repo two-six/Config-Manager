@@ -19,7 +19,7 @@ then
         echo $FILESFOLDER > $CONFIG
         if [ ! -d $FILESFOLDER ]
         then
-            mkdir -p $FILESFOLDER
+           mkdir -p $FILESFOLDER
         fi
     fi
 fi
@@ -36,7 +36,7 @@ else
     fi
     rm -rf $MAINFOLDER/backup/*
     FILES=1
-    LINE=$( grep -n "NAME|$1" $CONFIG | cut -d : -f1 )
+    LINE=$( grep -nx "NAME|$1" $CONFIG | cut -d : -f1 )
     LENGTH=$( wc -l $CONFIG | cut -d ' ' -f1 )
     for (( ; ; ))
     do
@@ -53,11 +53,6 @@ else
         elif [ $( cut -d \| -f1 <<< $CURRENT ) == "NAME" ] || [ $LINE -gt $LENGTH ] ||
                [ $( cut -d \| -f1 <<< $CURRENT ) == "COMMAND" ]
         then
-            break
-        fi
-        if [ $LINE -gt $LENGTH ]
-        then
-            echo "forced end"
             break
         fi
         NAME=$( cut -d \| -f1 <<< $CURRENT )

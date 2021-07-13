@@ -14,6 +14,5 @@ If you have no configuration folder and/or configuration files created, these wi
 For configuration instructions check [[https://gitlab.com/two_point_six/config-manager/-/blob/main/example/config.org]]
 * TODO TODO
 - Add some templating instructions.
-- Add the ability to run COMMAND file before copying files.
 - Create cli version of the script.
 - Create dmenu version of the script.
