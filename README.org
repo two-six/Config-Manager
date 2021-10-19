@@ -7,7 +7,7 @@ chmod +x config-manager
 #+end_src
 To launch this script, you need to run the following command:
 #+begin_src bash
-rofi -show config-manager -modi "config-manager:/path/to/config-manager"
+rofi -show config-manager -modi "config-manager:/absolute/path/to/config-manager"
 #+end_src
 If you have no configuration folder and/or configuration files created, these will be automatically created at the first launch in *$HOME/.config/config-manager/*. Just to be on the safe side script automatically creates backup of the previous configuration in *$HOME/.config/config-manager/backup* with names corresponding to those specified in the *config* file.
 * Configuration
